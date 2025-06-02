@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Preview...</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .loading-text {
+            color: #ccc;
+            text-align: center;
+            padding-top: 40vh;
+            font-family: sans-serif;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader" class="loading-text">Loading Game...</div>
+    <iframe id="gameFrame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <script>
+        function decodeGameUrl(encodedUrl) {
+            try {
+                // Decode from Base64
+                const rotated = atob(encodedUrl);
+                // Reverse the rotation cipher (subtract 47, handle wrap-around)
+                const original = rotated.split('').map(char => {
+                    const code = char.charCodeAt(0);
+                    if (code >= 33 && code <= 126) {
+                        // The original encoding was: (code - 33 + 47) % 94
+                        // To reverse: (code - 33 - 47 + 94) % 94. (Adding 94 to ensure positive before modulo)
+                        return String.fromCharCode(33 + ((code - 33 - 47 + 94) % 94));
+                    }
+                    return char;
+                }).join('');
+                return original;
+            } catch (e) {
+                console.error("Error decoding URL:", e);
+                return null; // Or a default/error URL
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameFrame = document.getElementById('gameFrame');
+            const loader = document.getElementById('loader');
+
+            if (window.location.hash && window.location.hash.length > 1) {
+                const encodedUrlFromHash = window.location.hash.substring(1); // Remove #
+                const decodedGameUrl = decodeGameUrl(encodedUrlFromHash);
+
+                if (decodedGameUrl) {
+                    loader.style.display = 'none';
+                    gameFrame.src = decodedGameUrl;
+                } else {
+                    loader.textContent = 'Error: Could not load preview.';
+                }
+            } else {
+                loader.textContent = 'Error: No preview link provided.';
+                console.error('No encoded URL found in hash.');
+            }
+        });
+    </script>
+</body>
+</html>
