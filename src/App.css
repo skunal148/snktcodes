@@ -125,7 +125,7 @@
             display: flex;
             align-items: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(38, 62, 147, 0.9) 0%, rgba(26, 44, 110, 0.95) 100%), url('banner.png') no-repeat center center/cover;
+            background: linear-gradient(135deg, rgba(38, 62, 147, 0.9) 0%, rgba(26, 44, 110, 0.95) 100%), url('/banner.png') no-repeat center center/cover;
             color: var(--white);
             position: relative;
             overflow: hidden;
