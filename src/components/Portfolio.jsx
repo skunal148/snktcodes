@@ -153,9 +153,10 @@ const actualHtml5GamesData = [
     "title": "Willy's Edge – Platformer Journey",
     "description": "Join Willy’s Edge Academy in this multi-phase platformer. Train, collect stars, avoid traps, and prove your skills in the office to win. Built with layered progression and character selection.",
     "thumbnailUrl": "thumbnails/willysEdge.png",
-    "gameUrl": "https://snktcodes.github.io/wileyedge_nxtlvlfinal_/"
+    "gameUrl": "https://snktcodes.github.io/wileyedge_nxtlvlfinal_/",
+    "displayMode": "landscape"
   }
-].map(game => ({ ...game, previewUrl: game.gameUrl, type: 'game' })); // Add previewUrl and type
+].map(game => ({ ...game, previewUrl: game.gameUrl, type: 'game', displayMode: game.displayMode || 'any'})); // Add previewUrl and type
 
 function encodeGameUrl(url) {
     // Simple rotation cipher + base64
@@ -179,6 +180,7 @@ function Portfolio() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIframeSrc, setCurrentIframeSrc] = useState('');
   const [currentItemTitle, setCurrentItemTitle] = useState('');
+  const [currentItemDisplayMode, setCurrentItemDisplayMode] = useState('any'); // New state
 
 
   useEffect(() => {
@@ -199,6 +201,7 @@ const openModalWithItem = (item) => {
 
     setCurrentIframeSrc(proxyUrl);
     setCurrentItemTitle(item.title);
+    setCurrentItemDisplayMode(item.displayMode || 'any'); // Set displayMode
     setIsModalOpen(true);
     console.log('Opening modal for:', item.title, 'via proxy with encoded fragment.');
   };
@@ -251,6 +254,7 @@ const openModalWithItem = (item) => {
         onClose={closeModal}
         iframeSrc={currentIframeSrc}
         title={currentItemTitle}
+        displayMode={currentItemDisplayMode}
       />
     </>
   );

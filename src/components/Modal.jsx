@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function Modal({ isOpen, onClose, iframeSrc, title = "Game Preview" }) {
+function Modal({ isOpen, onClose, iframeSrc, title = "Game Preview", displayMode= "any" }) {
   useEffect(() => {
     // Optional: Add/remove a class to body to prevent scrolling when modal is open
     if (isOpen) {
@@ -25,9 +25,13 @@ function Modal({ isOpen, onClose, iframeSrc, title = "Game Preview" }) {
     }
   };
 
+  const modalContainerClasses = `modal-container ${
+    displayMode === 'landscape' ? 'modal-landscape-content' : ''
+  }`;
+
   return (
     <div className="modal-overlay active" onClick={handleOverlayClick}> {/* 'active' class controls visibility via CSS */}
-      <div className="modal-container">
+      <div className={modalContainerClasses}>
         <div className="modal-close" onClick={onClose}></div>
         <div className="iframe-responsive-wrapper">
           {iframeSrc ? (

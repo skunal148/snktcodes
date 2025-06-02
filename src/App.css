@@ -755,6 +755,36 @@
                 z-index: 1002;
             }
         }
+
+        @media (max-width: 767px) and (orientation: portrait) {
+        .modal-container.modal-landscape-content {
+        width: 95vw; /* Use most of the viewport width */
+        height: auto; /* Let aspect-ratio and width determine height */
+        aspect-ratio: 16 / 9; /* Enforce 16:9 aspect ratio */
+
+        /* Override any max-height from general modal styles if it conflicts */
+        max-height: calc(95vw * 9 / 16); /* Ensure max-height also respects aspect ratio if needed */
+        /* Or simply rely on aspect-ratio to set the height and ensure it doesn't overflow viewport */
+    }
+
+    /* Ensure iframe and its wrapper fill the new aspect-ratio container */
+    .modal-container.modal-landscape-content .iframe-responsive-wrapper,
+    .modal-container.modal-landscape-content .modal-iframe {
+        width: 100%;
+        height: 100%;
+        }
+    }
+
+
+    @media (max-height: 480px) and (orientation: landscape) {
+    .modal-container.modal-landscape-content { /* Also apply to landscape-content if needed */
+        width: 95vw;
+        height: 90vh; /* This will likely be fine, game scales within */
+        aspect-ratio: unset; /* Unset aspect-ratio forced by portrait query if device IS landscape */
+        }
+    }
+
+        
         
         .modal-close {
             position: absolute;
