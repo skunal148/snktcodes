@@ -730,13 +730,13 @@
         }
         
         /* Portrait mode (width < height) - make iframe taller */
-        @media (max-aspect-ratio: 1/1) {
+/*         @media (max-aspect-ratio: 1/1) {
             .modal-container {
                 width: 95%;
                 height: 80vh;
                 max-height: 80vh;
             }
-        }
+        } */
         
         /* For phones in portrait mode */
         @media (max-width: 480px) and (orientation: portrait) {
@@ -759,12 +759,12 @@
         @media (max-width: 767px) and (orientation: portrait) {
         .modal-container.modal-landscape-content {
         width: 95vw; /* Use most of the viewport width */
-        height: auto; /* Let aspect-ratio and width determine height */
-        aspect-ratio: 16 / 9; /* Enforce 16:9 aspect ratio */
+        height: auto !important; /* Let aspect-ratio and width determine height */
+        aspect-ratio: 16 / 9 !important; /* Enforce 16:9 aspect ratio */
 
         /* Override any max-height from general modal styles if it conflicts */
-        max-height: calc(95vw * 9 / 16); /* Ensure max-height also respects aspect ratio if needed */
-        /* Or simply rely on aspect-ratio to set the height and ensure it doesn't overflow viewport */
+         /* max-height: calc(95vw * 9 / 16); /* Ensure max-height also respects aspect ratio if needed 
+        Or simply rely on aspect-ratio to set the height and ensure it doesn't overflow viewport */
     }
 
     /* Ensure iframe and its wrapper fill the new aspect-ratio container */
@@ -782,6 +782,14 @@
         height: 90vh; /* This will likely be fine, game scales within */
         aspect-ratio: unset; /* Unset aspect-ratio forced by portrait query if device IS landscape */
         }
+    .modal-container.modal-landscape-content {
+        /* When it's landscape content on a landscape device,
+           it should naturally fit well. Unset the forced aspect-ratio
+           if it was set for portrait view. */
+        aspect-ratio: unset; /* Allow it to fill the viewport's landscape shape */
+        width: 95vw;  /* Or adjust as needed */
+        height: 90vh; /* Or adjust as needed */
+    }
     }
 
         
