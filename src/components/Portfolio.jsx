@@ -108,6 +108,12 @@ const actualPlayableAdsData = [
     "description": "",
     "thumbnailUrl": "thumbnails/merigosmerge.png",
     "playableUrl": "https://snktcodes.github.io/playableADMerigosMerge/"
+  },
+  {
+    "id": "modern_command_mayhem_v2",
+    "title": "Modern Command Mayhem V2",
+    "thumbnailUrl": "",
+    "gameUrl": "https://snktcodes.github.io/playables/modern_command_mayhem_v2/"
   }
 ].map(ad => ({ ...ad, previewUrl: ad.playableUrl, type: 'playable' })); // Add previewUrl and type
 

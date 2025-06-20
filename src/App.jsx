@@ -8,6 +8,7 @@ import About from './components/About'
 import Platforms from './components/Platforms'
 import Portfolio from './components/Portfolio'
 import Footer from './components/Footer'
+import Brands from './components/Brands'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
     <Hero/>
     <main className="container"> {/* Added main container for content sections */}
         <About />
+        <Brands/>
         <Platforms/>
         <Portfolio /> 
     </main>
